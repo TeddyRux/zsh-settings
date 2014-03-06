@@ -46,6 +46,18 @@ sslgen() {
 	openssl req -new -key ssl-key.pem -out certrequest.csr
 	openssl x509 -req -in certrequest.csr -signkey ssl-key.pem -out ssl-cert.pem
 }
+
+alias repos=repos
+repos() {
+	if [ "$1" != "" ];	then
+		git clone git@github.com:TeddyRux/$1.git
+		cd $1
+		git remote add bb git@github.com:brandingbrand/$1.git
+		git fetch --all
+		git pull bb master
+		npmi
+	fi
+}
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
